@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MyKin — Assisted living technology, fully managed</title>
+<style>
+  :root {
+    --navy: #1C2B39;
+    --card: #243444;
+    --cream: #F4F1EC;
+    --sage: #74C69D;
+    --teal: #0E8C7A;
+    --gold: #C9922A;
+    --gold-bright: #E8B84B;
+    --muted: #7A9BAA;
+    --body: #4A5F70;
+    --border: #DCE3E8;
+    --white: #FFFFFF;
+    --bg: var(--cream);
+    --text: var(--body);
+    --panel: var(--white);
+    --panel-border: var(--border);
+    --heading: var(--navy);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14202B;
+      --text: #C7D2D9;
+      --panel: #1C2B39;
+      --panel-border: #2E3F4E;
+      --heading: #F4F1EC;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #14202B;
+    --text: #C7D2D9;
+    --panel: #1C2B39;
+    --panel-border: #2E3F4E;
+    --heading: #F4F1EC;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Calibri', 'Segoe UI', Tahoma, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  h1, h2, h3, .serif {
+    font-family: 'Cambria', Georgia, serif;
+    color: var(--heading);
+    margin: 0;
+  }
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  a { color: inherit; }
+
+  /* Header */
+  /* header rule removed — logo now lives inside the navy hero */
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    font-family: 'Cambria', Georgia, serif;
+    font-size: 2.2rem;
+    font-weight: bold;
+  }
+  .logo .icon {
+    width: 46px; height: 46px;
+    flex-shrink: 0;
+  }
+  .logo .kin { color: var(--gold); }
+
+  /* Hero */
+  .hero {
+    background: var(--navy);
+    color: var(--white);
+    padding: 4.5rem 0 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero .wrap { position: relative; z-index: 1; }
+  .hero-blob {
+    position: absolute; border-radius: 50%;
+    background: var(--card); opacity: 0.6;
+  }
+  .hero-blob.a { width: 420px; height: 420px; top: -180px; right: -120px; }
+  .hero-blob.b { width: 320px; height: 320px; bottom: -160px; left: -140px; }
+  .hero h1 {
+    font-size: clamp(1.9rem, 4vw, 2.75rem);
+    line-height: 1.2;
+    max-width: 720px;
+    color: var(--white);
+  }
+  .hero .tagline {
+    font-family: 'Cambria', Georgia, serif;
+    font-style: italic;
+    color: var(--sage);
+    font-size: 1.15rem;
+    margin-top: 0.9rem;
+  }
+  .hero p.lede {
+    max-width: 620px;
+    margin-top: 1.3rem;
+    color: var(--muted);
+    font-size: 1.05rem;
+  }
+  .btn {
+    display: inline-block;
+    margin-top: 2rem;
+    background: var(--gold-bright);
+    color: #2A1F08;
+    font-weight: bold;
+    padding: 0.85rem 1.6rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-size: 1rem;
+  }
+  .btn:hover { background: var(--gold); }
+
+  /* Sections */
+  section { padding: 3.5rem 0; }
+  .kicker {
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 0.12em;
+    color: var(--teal);
+    text-transform: uppercase;
+  }
+  section h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin-top: 0.4rem;
+    margin-bottom: 1rem;
+  }
+  section > .wrap > p.section-lede {
+    max-width: 680px;
+    font-size: 1.02rem;
+    margin-bottom: 2rem;
+  }
+
+  /* Card grid */
+  .grid3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  @media (max-width: 720px) {
+    .grid3 { grid-template-columns: 1fr; }
+  }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 0.6rem;
+    padding: 1.5rem;
+  }
+  .card .bar {
+    height: 4px; width: 2.4rem;
+    background: var(--teal);
+    border-radius: 2px;
+    margin-bottom: 1rem;
+  }
+  .card:nth-child(2) .bar { background: var(--gold); }
+  .card:nth-child(3) .bar { background: var(--sage); }
+  .card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+  }
+  .card p { margin: 0; font-size: 0.96rem; }
+
+  /* Tiers */
+  .tiers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  @media (max-width: 720px) {
+    .tiers { grid-template-columns: 1fr; }
+  }
+  .tier {
+    background: var(--navy);
+    color: var(--white);
+    border-radius: 0.6rem;
+    padding: 1.5rem;
+  }
+  .tier h3 {
+    color: var(--white);
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+  }
+  .tier p {
+    color: var(--muted);
+    margin: 0;
+    font-size: 0.94rem;
+  }
+
+  /* Who we work with */
+  .partners {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+  @media (max-width: 900px) {
+    .partners { grid-template-columns: repeat(2, 1fr); }
+  }
+  .partner {
+    border: 1px solid var(--panel-border);
+    border-radius: 0.5rem;
+    padding: 1.1rem;
+    background: var(--panel);
+    font-size: 0.92rem;
+  }
+  .partner strong {
+    display: block;
+    color: var(--heading);
+    font-family: 'Cambria', Georgia, serif;
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+  }
+  .partner-featured {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: var(--white);
+    grid-column: span 2;
+  }
+  .partner-featured strong { color: var(--white); }
+  @media (max-width: 900px) {
+    .partner-featured { grid-column: span 2; }
+  }
+  @media (max-width: 600px) {
+    .partner-featured { grid-column: span 1; }
+  }
+
+  /* Contact */
+  .contact {
+    background: var(--card);
+    color: var(--white);
+    border-radius: 0.8rem;
+    padding: 2.5rem;
+    text-align: center;
+  }
+  .contact h2 { color: var(--white); }
+  .contact p {
+    color: var(--muted);
+    max-width: 520px;
+    margin: 0.8rem auto 0;
+  }
+  .contact .email-line {
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+    color: var(--sage);
+  }
+
+  footer {
+    padding: 2.5rem 0 3rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<section class="hero" style="padding-top:2.5rem;">
+  <div class="hero-blob a"></div>
+  <div class="hero-blob b"></div>
+  <div class="wrap">
+    <div class="logo" style="margin-bottom: 2.5rem;">
+      <svg class="icon" viewBox="0 0 414 249" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path fill="#FFFFFF" d="M207 0 L414 130 L390 165 L207 55 L24 165 L0 130 Z"/>
+        <rect x="90" y="120" width="234" height="129" fill="#FFFFFF"/>
+        <rect x="175" y="170" width="64" height="79" fill="var(--navy)"/>
+      </svg>
+      <span><span style="color:#FFFFFF;">My</span><span class="kin">Kin</span></span>
+    </div>
+    <h1>Assisted living technology, specified, installed and managed end to end.</h1>
+    <p class="tagline">Caring for your family, from a distance.</p>
+    <p class="lede">
+      MyKin builds a smart home system that learns a household's normal routine and flags
+      meaningful change, for councils, care providers, housebuilders and connectivity partners
+      building assisted living support. We handle the hardware, the install and the ongoing
+      service, so you don't have to.
+    </p>
+    <a class="btn" href="#contact">Get in touch</a>
+  </div>
+</section>
+
+<section id="what">
+  <div class="wrap">
+    <div class="kicker">What we do</div>
+    <h2>One managed service, not a box to configure</h2>
+    <p class="section-lede">
+      We specify the right setup for each property, install it in a single visit, and run the
+      platform that watches for change. Nobody on the receiving end has to be technical.
+    </p>
+    <div class="grid3">
+      <div class="card">
+        <div class="bar"></div>
+        <h3>Installed for them</h3>
+        <p>We survey the property, fit everything ourselves, and carry the warranty. Nothing to unbox, pair or configure.</p>
+      </div>
+      <div class="card">
+        <div class="bar"></div>
+        <h3>Analytics that notice change</h3>
+        <p>The system builds a picture of someone's normal routine over time, then flags when that pattern shifts in a way that matters.</p>
+      </div>
+      <div class="card">
+        <div class="bar"></div>
+        <h3>Consent built in, not bolted on</h3>
+        <p>Oversight is matched to the relationship, from full independence through to full guardianship, with the resident's consent at the centre.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tiers">
+  <div class="wrap">
+    <div class="kicker">The product</div>
+    <h2>Three levels of support, one system</h2>
+    <p class="section-lede">
+      The hardware and the install are the same throughout. What changes between tiers is the
+      level of oversight, so a home never has to look or feel institutional.
+    </p>
+    <div class="tiers">
+      <div class="tier">
+        <h3>Resident</h3>
+        <p>A smart home with no oversight layer. No one else has access. Built for someone who wants the convenience and safety features with full independence.</p>
+      </div>
+      <div class="tier">
+        <h3>Assisted Living</h3>
+        <p>A resident and a carer. The resident keeps full autonomy and decides what is shared, with whom, and when.</p>
+      </div>
+      <div class="tier">
+        <h3>Full Guardianship</h3>
+        <p>A guardian-only account for someone who cannot direct their own care. Requires Power of Attorney, with every design decision built around that responsibility.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="who">
+  <div class="wrap">
+    <div class="kicker">Who we work with</div>
+    <h2>Built to fit into an existing system, not replace it</h2>
+    <p class="section-lede">
+      MyKin is designed to sit alongside the people already doing this work, not around them.
+    </p>
+    <div class="partners">
+      <div class="partner partner-featured">
+        <strong>Housebuilders</strong>
+        A genuine differentiator on every plot, not just another spec line. Buyers see a home
+        already built for ageing in place, and you take on none of the install, warranty or
+        ongoing service risk. Specified at planning stage, fitted during construction, with no
+        extra site visits.
+      </div>
+      <div class="partner">
+        <strong>Local authorities</strong>
+        Preventative technology for adult social care, commissioned per person.
+      </div>
+      <div class="partner">
+        <strong>Care and supported housing providers</strong>
+        Specified building by building, alongside existing care delivery.
+      </div>
+      <div class="partner">
+        <strong>Connectivity and technology partners</strong>
+        A managed service layer on top of hardware and network infrastructure already in place.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact">
+      <div class="kicker" style="color:var(--sage);">Get in touch</div>
+      <h2>Tell us what you're working on</h2>
+      <p>
+        Whether you're exploring this for the first time or already have a specific need in mind,
+        we'd like to hear about it. A short conversation is the best way to work out whether
+        there's a fit.
+      </p>
+      <a class="btn" href="mailto:enquiries@mykin.co.uk?subject=Enquiry%20from%20mykin.co.uk">Email us</a>
+      <div class="email-line">enquiries@mykin.co.uk</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    MyKin &middot; Caring for your family, from a distance.
+  </div>
+</footer>
+
+</body>
+</html>

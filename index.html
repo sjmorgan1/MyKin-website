@@ -204,6 +204,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
+    align-items: stretch;
   }
   @media (max-width: 900px) {
     .partners { grid-template-columns: repeat(2, 1fr); }
@@ -214,6 +215,15 @@
     padding: 1.1rem;
     background: var(--panel);
     font-size: 0.92rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .partner .bar {
+    height: 4px; width: 2rem;
+    background: var(--gold);
+    border-radius: 2px;
+    margin-bottom: 0.8rem;
   }
   .partner strong {
     display: block;
@@ -221,19 +231,6 @@
     font-family: 'Cambria', Georgia, serif;
     font-size: 1rem;
     margin-bottom: 0.3rem;
-  }
-  .partner-featured {
-    background: var(--navy);
-    border-color: var(--navy);
-    color: var(--white);
-    grid-column: span 2;
-  }
-  .partner-featured strong { color: var(--white); }
-  @media (max-width: 900px) {
-    .partner-featured { grid-column: span 2; }
-  }
-  @media (max-width: 600px) {
-    .partner-featured { grid-column: span 1; }
   }
 
   /* Contact */
@@ -271,10 +268,10 @@
   <div class="hero-blob b"></div>
   <div class="wrap">
     <div class="logo" style="margin-bottom: 2.5rem;">
-      <svg class="icon" viewBox="0 0 414 249" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path fill="#FFFFFF" d="M207 0 L414 130 L390 165 L207 55 L24 165 L0 130 Z"/>
-        <rect x="90" y="120" width="234" height="129" fill="#FFFFFF"/>
-        <rect x="175" y="170" width="64" height="79" fill="var(--navy)"/>
+      <svg class="icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path fill="#FFFFFF" d="M50 24 L83 50 L75 50 L50 32 L25 50 L17 50 Z"/>
+        <rect x="29" y="48" width="42" height="36" fill="#FFFFFF"/>
+        <rect x="43" y="62" width="14" height="22" fill="var(--navy)"/>
       </svg>
       <span><span style="color:#FFFFFF;">My</span><span class="kin">Kin</span></span>
     </div>
@@ -351,7 +348,8 @@
       MyKin is designed to sit alongside the people already doing this work, not around them.
     </p>
     <div class="partners">
-      <div class="partner partner-featured">
+      <div class="partner">
+        <div class="bar"></div>
         <strong>Housebuilders</strong>
         A genuine differentiator on every plot, not just another spec line. Buyers see a home
         already built for ageing in place, and you take on none of the install, warranty or
@@ -359,14 +357,17 @@
         extra site visits.
       </div>
       <div class="partner">
+        <div class="bar"></div>
         <strong>Local authorities</strong>
         Preventative technology for adult social care, commissioned per person.
       </div>
       <div class="partner">
+        <div class="bar"></div>
         <strong>Care and supported housing providers</strong>
         Specified building by building, alongside existing care delivery.
       </div>
       <div class="partner">
+        <div class="bar"></div>
         <strong>Connectivity and technology partners</strong>
         A managed service layer on top of hardware and network infrastructure already in place.
       </div>
